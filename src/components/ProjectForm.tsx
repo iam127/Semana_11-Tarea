@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -44,8 +44,26 @@ const initialProjects: Project[] = [
   { id: 6, name: "Marketing Website", description: "Sitio web institucional", category: "marketing", priority: "high", members: "Juan Pérez, Ana López", status: "En progreso", progress: 75 },
 ]
 
+const STORAGE_KEY = "lab11_projects"
+
 export function useProjects() {
-  const [projects, setProjects] = useState<Project[]>(initialProjects)
+  const [projects, setProjects] = useState<Project[]>(() => {
+    if (typeof window === "undefined") return initialProjects
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY)
+      return saved ? JSON.parse(saved) : initialProjects
+    } catch {
+      return initialProjects
+    }
+  })
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(projects))
+    } catch {
+      // localStorage no disponible
+    }
+  }, [projects])
 
   const addProject = (project: Omit<Project, "id" | "status" | "progress">) => {
     const newProject: Project = {
@@ -264,7 +282,6 @@ export function ProjectCard({ project, onDelete, onUpdate }: ProjectCardProps) {
       )}
 
       <div className="flex justify-end gap-2 pt-1">
-        {/* Ver detalles / Editar */}
         <Dialog open={openDetail} onOpenChange={setOpenDetail}>
           <DialogTrigger asChild>
             <Button size="sm" variant="ghost">Ver detalles</Button>
@@ -313,7 +330,6 @@ export function ProjectCard({ project, onDelete, onUpdate }: ProjectCardProps) {
           </DialogContent>
         </Dialog>
 
-        {/* Eliminar */}
         <Button size="sm" variant="destructive" onClick={() => onDelete(project.id)}>
           Eliminar
         </Button>

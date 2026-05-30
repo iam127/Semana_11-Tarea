@@ -4,65 +4,35 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: 210 100% 98%;
-  --foreground: 217 33% 17%;
+  --background: 225 35% 97%;
+  --foreground: 222 47% 8%;
 
   --card: 0 0% 100%;
-  --card-foreground: 217 33% 17%;
+  --card-foreground: 222 47% 8%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 217 33% 17%;
+  --popover-foreground: 222 47% 8%;
 
-  --primary: 213 94% 50%;
+  --primary: 239 84% 57%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 210 40% 90%;
-  --secondary-foreground: 213 94% 30%;
+  --secondary: 225 30% 95%;
+  --secondary-foreground: 222 20% 40%;
 
-  --muted: 210 40% 95%;
-  --muted-foreground: 215 20% 50%;
+  --muted: 225 25% 95%;
+  --muted-foreground: 220 9% 46%;
 
-  --accent: 210 40% 90%;
-  --accent-foreground: 213 94% 30%;
+  --accent: 239 60% 94%;
+  --accent-foreground: 239 84% 57%;
 
-  --destructive: 0 84% 60%;
+  --destructive: 0 72% 58%;
   --destructive-foreground: 0 0% 100%;
 
-  --border: 214 32% 85%;
-  --input: 214 32% 85%;
-  --ring: 213 94% 50%;
+  --border: 225 30% 90%;
+  --input: 225 30% 90%;
+  --ring: 239 84% 57%;
 
-  --radius: 0.5rem;
-}
-
-.dark {
-  --background: 217 33% 10%;
-  --foreground: 210 40% 95%;
-
-  --card: 217 33% 13%;
-  --card-foreground: 210 40% 95%;
-
-  --popover: 217 33% 13%;
-  --popover-foreground: 210 40% 95%;
-
-  --primary: 213 94% 55%;
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 217 33% 20%;
-  --secondary-foreground: 210 40% 95%;
-
-  --muted: 217 33% 20%;
-  --muted-foreground: 215 20% 65%;
-
-  --accent: 217 33% 20%;
-  --accent-foreground: 210 40% 95%;
-
-  --destructive: 0 62% 50%;
-  --destructive-foreground: 0 0% 100%;
-
-  --border: 217 33% 25%;
-  --input: 217 33% 25%;
-  --ring: 213 94% 55%;
+  --radius: 0.75rem;
 }
 
 @theme inline {
@@ -91,13 +61,30 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-* {
-  border-color: hsl(var(--border));
-  outline-color: hsl(var(--ring));
-}
+* { border-color: hsl(var(--border)); outline-color: hsl(var(--ring)); }
 
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-family: var(--font-geist-sans, sans-serif);
+  font-family: 'Plus Jakarta Sans', 'Helvetica Neue', system-ui, sans-serif;
 }
+
+/* Scrollbar sutil */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #C7D2FE; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #4F46E5; }
+
+/* Calendar light overrides */
+.rdp-day_selected,
+.rdp-day_selected:hover {
+  background: #4F46E5 !important;
+  color: white !important;
+  border-radius: 9px !important;
+  font-weight: 700 !important;
+}
+.rdp-day:hover:not(.rdp-day_selected) {
+  background: #EEF2FF !important;
+  border-radius: 9px !important;
+}
+.rdp-nav_button:hover { background: #EEF2FF !important; border-radius: 8px !important; }
