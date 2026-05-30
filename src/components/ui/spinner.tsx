@@ -1,0 +1,33 @@
+import { cn } from "@/lib/utils"
+
+interface SpinnerProps {
+  className?: string
+  size?: "sm" | "md" | "lg"
+}
+
+export function Spinner({ className, size = "md" }: SpinnerProps) {
+  const sizeClasses = {
+    sm: "h-4 w-4 border-2",
+    md: "h-8 w-8 border-4",
+    lg: "h-12 w-12 border-4",
+  }
+
+  return (
+    <div
+      className={cn(
+        "animate-spin rounded-full border-primary border-t-transparent",
+        sizeClasses[size],
+        className
+      )}
+    />
+  )
+}
+
+export function SpinnerOverlay({ message = "Cargando..." }: { message?: string }) {
+  return (
+    <div className="flex flex-col items-center justify-center gap-3 py-8">
+      <Spinner size="lg" />
+      <p className="text-sm text-muted-foreground">{message}</p>
+    </div>
+  )
+}
